@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Tree Visualizer — Smart Parking</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="topbar">
+        <h1>🌳 Search Tree Visualizer</h1>
+        <button class="report-btn">📥 Download Report</button>
+    </header>
+
+    <nav class="tabs">
+        <button class="tab active" data-tab="visualizer">🌲 BST Visualizer</button>
+        <button class="tab" data-tab="spots">🅿️ Parking Spots</button>
+        <button class="tab" data-tab="reports">📊 Reports</button>
+    </nav>
+
+    <main>
+        <!-- TAB 1: BST VISUALIZER -->
+        <section class="tab-content active" id="visualizer">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Binary Search Tree Visualization</h2>
+                    <select id="sortSelect" class="dropdown">
+                        <option value="id">Sort by Spot ID</option>
+                        <option value="location">Sort by Location</option>
+                    </select>
+                </div>
+
+                <div class="controls">
+                    <select id="traversalSelect" class="dropdown">
+                        <option value="preorder">Preorder Traversal</option>
+                        <option value="inorder">Inorder Traversal</option>
+                        <option value="postorder">Postorder Traversal</option>
+                        <option value="levelorder">Level Order Traversal</option>
+                    </select>
+                    <button id="startBtn" class="btn success">▶ Start Traversal</button>
+                    <button id="nextBtn" class="btn primary" disabled>⏭ Next Step</button>
+                    <button id="resetBtn" class="btn dark">🔄 Reset</button>
+                </div>
+
+                <div class="progress-bar">
+                    <span id="progressText">Traversal Progress: Not started</span><br>
+                    <span id="currentText">Current Node: —</span>
+                </div>
+
+                <div id="canvas">
+                    <svg id="treeSvg"></svg>
+                </div>
+
+                <div class="result-section">
+                    <h3>Traversal Result:</h3>
+                    <div id="resultBoxes" class="result-boxes"></div>
+                </div>
+
+                <div class="legend">
+                    <strong>Legend:</strong>
+                    <span class="legend-item"><span class="dot unvisited"></span> Unvisited</span>
+                    <span class="legend-item"><span class="dot current"></span> Current</span>
+                    <span class="legend-item"><span class="dot visited"></span> Visited</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: PARKING SPOTS -->
+        <section class="tab-content" id="spots">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Parking Spots Management</h2>
+                    <button class="btn success" id="addSpotBtn">+ Add Spot</button>
+                </div>
+                <div class="add-form" id="addForm" style="display:none;">
+                    <input type="number" id="newSpotId" placeholder="Spot ID (e.g., 45)">
+                    <input type="text" id="newLocation" placeholder="Location (e.g., L1-A05)">
+                    <select id="newStatus">
+                        <option value="0">Available</option>
+                        <option value="1">Occupied</option>
+                    </select>
+                    <input type="text" id="newVehicle" placeholder="Vehicle No (optional)">
+                    <button class="btn primary" id="saveSpotBtn">Save</button>
+                    <button class="btn dark" id="cancelSpotBtn">Cancel</button>
+                </div>
+
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Spot ID</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                            <th>Vehicle</th>
+                        </tr>
+                    </thead>
+                    <tbody id="spotsTable"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TAB 3: REPORTS -->
+        <section class="tab-content" id="reports">
+            <div class="card">
+                <h2>Reports & Analytics</h2>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <span class="stat-label">Total Spots</span>
+                        <span class="stat-value" id="totalSpots">0</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">Available</span>
+                        <span class="stat-value green" id="availableSpots">0</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">Occupied</span>
+                        <span class="stat-value red" id="occupiedSpots">0</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">Occupancy Rate</span>
+                        <span class="stat-value orange" id="occupancyRate">0%</span>
+                    </div>
+                </div>
+
+                <div class="report-actions">
+                    <button class="btn primary" id="downloadReport">📥 Download Parking Summary Report</button>
+                </div>
+
+                <h3>Recently Added Spots</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Spot ID</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recentTable"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
